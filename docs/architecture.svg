@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" font-family="Apple SD Gothic Neo, Malgun Gothic, Arial, sans-serif">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+<rect width="1200" height="900" fill="#fff"/>
+<text x="600" y="38" font-size="24" font-weight="bold" text-anchor="middle">AWS 웹 서비스 아키텍처 (ap-northeast-2 서울)</text>
+
+<rect x="440" y="60" width="320" height="50" rx="25" fill="#eceff1" stroke="#455a64" stroke-width="2"/>
+<text x="600" y="91" font-size="18" text-anchor="middle">외부 사용자 / 인터넷</text>
+
+<rect x="40" y="130" width="1120" height="740" rx="12" fill="#fffaf0" stroke="#ff9900" stroke-width="3" stroke-dasharray="10 5"/>
+<text x="60" y="158" font-size="16" font-weight="bold" fill="#e65100">AWS Cloud</text>
+
+<rect x="470" y="175" width="260" height="56" rx="8" fill="#e1bee7" stroke="#6a1b9a" stroke-width="2"/>
+<text x="600" y="200" font-size="17" font-weight="bold" text-anchor="middle">Internet Gateway (IGW)</text>
+<text x="600" y="220" font-size="13" text-anchor="middle">VPC에 Attach</text>
+<line x1="600" y1="231" x2="600" y2="275" stroke="#333" stroke-width="2.5" marker-end="url(#a)"/>
+
+<rect x="80" y="275" width="1040" height="570" rx="10" fill="#e8f5e9" stroke="#2e7d32" stroke-width="3"/>
+<text x="100" y="303" font-size="17" font-weight="bold" fill="#1b5e20">VPC (10.0.0.0/16)</text>
+
+<rect x="130" y="325" width="320" height="95" rx="8" fill="#fff" stroke="#00695c" stroke-width="2"/>
+<text x="290" y="352" font-size="16" font-weight="bold" text-anchor="middle">Route Table</text>
+<text x="290" y="378" font-size="14" text-anchor="middle">Destination: 0.0.0.0/0 → IGW</text>
+<text x="290" y="400" font-size="14" text-anchor="middle">10.0.0.0/16 → local</text>
+<line x1="450" y1="372" x2="540" y2="445" stroke="#00695c" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#a)"/>
+<text x="430" y="438" font-size="13" fill="#00695c">서브넷에 연결</text>
+
+<rect x="170" y="445" width="860" height="370" rx="10" fill="#e3f2fd" stroke="#1565c0" stroke-width="3"/>
+<text x="190" y="473" font-size="17" font-weight="bold" fill="#0d47a1">Public Subnet (10.0.1.0/24) · 자동 Public IP 할당</text>
+
+<rect x="230" y="500" width="740" height="290" rx="10" fill="#ffebee" stroke="#c62828" stroke-width="3" stroke-dasharray="8 4"/>
+<text x="250" y="528" font-size="16" font-weight="bold" fill="#b71c1c">Security Group (인스턴스 방화벽)</text>
+<text x="250" y="554" font-size="14">• Inbound HTTP (80) : 0.0.0.0/0  (전 세계 허용)</text>
+<text x="250" y="576" font-size="14">• Inbound SSH (22) : 내 개인 IP/32 만 허용 (0.0.0.0/0 금지)</text>
+
+<rect x="330" y="605" width="540" height="150" rx="8" fill="#fff" stroke="#ef6c00" stroke-width="3"/>
+<text x="600" y="640" font-size="18" font-weight="bold" text-anchor="middle">EC2 인스턴스 (Ubuntu / Amazon Linux)</text>
+<text x="600" y="672" font-size="15" text-anchor="middle">Nginx 웹서버 · Port 80</text>
+<text x="600" y="698" font-size="15" text-anchor="middle">Public IP: x.x.x.x</text>
+<text x="600" y="724" font-size="15" text-anchor="middle">EBS 8~10GiB · Key Pair 1개</text>
+
+<line x1="600" y1="110" x2="600" y2="173" stroke="#333" stroke-width="2.5" marker-end="url(#a)"/>
+<text x="615" y="150" font-size="15" fill="#c62828">HTTP 80 (전체) / SSH 22 (내 IP)</text>
+<path d="M730,203 H1060 V680 H872" fill="none" stroke="#c62828" stroke-width="3" marker-end="url(#a)"/>
+<text x="1070" y="440" font-size="14" fill="#c62828" transform="rotate(90 1070 440)" text-anchor="middle">① IGW → Route Table → SG 검사 → EC2:80</text>
+</svg>
