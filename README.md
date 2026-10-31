@@ -35,3 +35,5 @@
 │                                                                                 │
 +---------------------------------------------------------------------------------+
 ```
+
+<img width="1222" height="412" alt="image" src="https://github.com/user-attachments/assets/7b042ec1-fdae-4b4f-8eda-624cdb06b48b" />
